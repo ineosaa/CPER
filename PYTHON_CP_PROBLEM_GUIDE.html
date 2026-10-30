@@ -1,0 +1,1363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Python for Competitive Programming — Assiut Problem Guide</title>
+    <style>
+      :root {
+        --page: #f4f6f8;
+        --surface: #ffffff;
+        --ink: #182b3a;
+        --muted: #526575;
+        --border: #dce3e9;
+        --accent: #075e63;
+        --soft: #eaf5f3;
+        --stripe: #f8fafb;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--ink);
+        background: var(--page);
+        line-height: 1.6;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --page: #101820;
+          --surface: #192630;
+          --ink: #e8eff4;
+          --muted: #b3c1cd;
+          --border: #364954;
+          --accent: #8ddbd1;
+          --soft: #203d3c;
+          --stripe: #1d2d38;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      body {
+        margin: 0;
+      }
+      a {
+        color: var(--accent);
+        text-underline-offset: 3px;
+      }
+      a:hover {
+        text-decoration-thickness: 2px;
+      }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 4px;
+      }
+      header,
+      main,
+      footer,
+      .toolbar-inner {
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+      header {
+        padding: 56px 28px 28px;
+      }
+      .eyebrow {
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: clamp(30px, 5vw, 48px);
+        letter-spacing: -0.045em;
+        line-height: 1.15;
+        margin: 14px 0;
+      }
+      .intro {
+        color: var(--muted);
+        max-width: 760px;
+        font-size: 17px;
+      }
+      .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 22px;
+      }
+      .badge {
+        background: var(--soft);
+        color: var(--accent);
+        border-radius: 6px;
+        padding: 5px 12px;
+        font-size: 13px;
+        font-weight: 650;
+      }
+      .toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: var(--surface);
+        border-block: 1px solid var(--border);
+      }
+      .toolbar-inner {
+        padding: 12px 28px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+      button {
+        font: inherit;
+        font-size: 13px;
+        font-weight: 650;
+        padding: 9px 13px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--ink);
+        cursor: pointer;
+      }
+      button[aria-pressed="true"] {
+        background: var(--soft);
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+      button:hover {
+        border-color: var(--accent);
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      #hide-all {
+        background: var(--ink);
+        color: var(--surface);
+        border-color: var(--ink);
+      }
+      #visibility-status {
+        font-size: 12px;
+        color: var(--muted);
+        margin-left: auto;
+      }
+      main {
+        padding: 28px;
+      }
+      .instructions {
+        color: var(--muted);
+        font-size: 13px;
+        margin: 0 0 24px;
+      }
+      kbd {
+        font: inherit;
+        font-weight: 700;
+        padding: 1px 5px;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+      }
+      nav {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 34px;
+      }
+      nav a {
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: var(--surface);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 650;
+      }
+      section {
+        margin-bottom: 32px;
+        scroll-margin-top: 130px;
+      }
+      .section-heading {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        margin-bottom: 14px;
+      }
+      .section-number {
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: var(--soft);
+        color: var(--accent);
+        font-weight: 800;
+        font-size: 14px;
+      }
+      h2 {
+        font-size: 21px;
+        line-height: 1.35;
+        letter-spacing: -0.02em;
+        margin: 1px 0 3px;
+      }
+      .section-heading p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--surface);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+      }
+      th {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        background: var(--stripe);
+      }
+      th,
+      td {
+        padding: 14px 18px;
+        vertical-align: top;
+        border-bottom: 1px solid var(--border);
+      }
+      tbody tr:last-child td {
+        border-bottom: 0;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--stripe);
+      }
+      td {
+        font-size: 14px;
+      }
+      .order {
+        width: 54px;
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+      }
+      .problem a {
+        display: inline-block;
+        font-weight: 700;
+        font-size: 15px;
+      }
+      .source {
+        display: block;
+        color: var(--muted);
+        font-size: 12px;
+        margin-top: 3px;
+      }
+      .learning,
+      .task {
+        width: 29%;
+        min-width: 210px;
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+        font-size: 0.93em;
+      }
+      footer {
+        padding: 0 28px 40px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      footer p {
+        margin: 8px 0;
+      }
+      @media (max-width: 640px) {
+        header {
+          padding: 30px 18px 22px;
+        }
+        main {
+          padding: 22px 14px;
+        }
+        .toolbar {
+          position: static;
+        }
+        .toolbar-inner {
+          padding: 12px 14px;
+          gap: 8px;
+        }
+        #visibility-status {
+          width: 100%;
+          margin-left: 0;
+        }
+        nav {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        th,
+        td {
+          padding: 12px;
+        }
+        h2 {
+          font-size: 19px;
+        }
+        section {
+          scroll-margin-top: 16px;
+        }
+        footer {
+          padding-inline: 18px;
+        }
+      }
+      @media print {
+        :root {
+          --page: white;
+          --surface: white;
+          --ink: #111;
+          --muted: #444;
+          --border: #ccc;
+          --accent: #164d52;
+          --soft: #eee;
+          --stripe: #fafafa;
+        }
+        .toolbar,
+        nav,
+        .instructions,
+        .no-script {
+          display: none;
+        }
+        header {
+          padding-top: 0;
+        }
+        header,
+        main,
+        footer {
+          max-width: none;
+          padding-inline: 0;
+        }
+        h1 {
+          font-size: 30px;
+        }
+        h2,
+        .section-heading {
+          break-after: avoid;
+        }
+        tr {
+          break-inside: avoid;
+        }
+        thead {
+          display: table-header-group;
+        }
+        .table-wrap {
+          overflow: visible;
+        }
+        .learning,
+        .task {
+          min-width: 0;
+        }
+        th,
+        td {
+          padding: 8px;
+        }
+        td,
+        .problem a {
+          font-size: 11px;
+        }
+        a {
+          text-decoration: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="eyebrow">
+        Assiut University Training · Teaching &amp; Practice Guide
+      </div>
+      <h1>Python for Competitive Programming</h1>
+      <p class="intro">
+        Learn the language through problems. Follow a carefully ordered path
+        from first inputs and loops to useful data structures, mathematical
+        reasoning, and algorithmic challenges.
+      </p>
+      <div class="badges">
+        <span class="badge">33 curated problems</span
+        ><span class="badge">All 10 numbered sheets</span
+        ><span class="badge">8 learning stages</span
+        ><span class="badge">Beginner → Stretch</span>
+      </div>
+    </header>
+    <div class="toolbar" role="region" aria-label="Presentation controls">
+      <div class="toolbar-inner">
+        <button
+          id="toggle-learning"
+          type="button"
+          aria-pressed="false"
+          disabled
+        >
+          Show Main Learning
+        </button>
+        <button id="toggle-task" type="button" aria-pressed="false" disabled>
+          Show What to Do
+        </button>
+        <button id="show-all" type="button" disabled>Show Both Columns</button>
+        <button id="hide-all" type="button" disabled>Hide Both · Esc</button>
+        <button id="print-guide" type="button" disabled>
+          Print / Save PDF
+        </button>
+        <span id="visibility-status" role="status" aria-live="polite"
+          >Both teaching columns are hidden</span
+        >
+      </div>
+    </div>
+    <main>
+      <p class="instructions">
+        Presentation tip: problem links always remain visible and open in a new
+        tab. Reveal each teaching column when ready, or press <kbd>Esc</kbd> to
+        hide both. Reloading resets both columns to hidden. Printing includes
+        only the currently visible columns.
+      </p>
+      <noscript
+        ><p class="no-script">
+          Enable JavaScript to use the reveal controls. All problem links remain
+          available below; teaching columns stay hidden.
+        </p></noscript
+      >
+      <nav aria-label="Learning stages">
+        <a href="#foundations">01 · Input &amp; Decisions</a
+        ><a href="#loops">02 · Loops</a><a href="#lists">03 · Lists</a
+        ><a href="#strings">04 · Strings</a
+        ><a href="#sets-dictionaries">05 · Sets &amp; Dictionaries</a
+        ><a href="#maths">06 · Maths &amp; Efficiency</a
+        ><a href="#challenges">07 · Application Challenges</a
+        ><a href="#stretch">08 · Algorithmic Stretch</a>
+      </nav>
+
+      <section id="foundations" aria-labelledby="foundations-title">
+        <div class="section-heading">
+          <span class="section-number">01</span>
+          <div>
+            <h2 id="foundations-title">Input, Arithmetic &amp; Decisions</h2>
+            <p>Read values, calculate results, and make decisions.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table aria-labelledby="foundations-title">
+            <thead>
+              <tr>
+                <th scope="col" class="order">#</th>
+                <th scope="col">Problem</th>
+                <th scope="col" class="learning" hidden>Main Learning</th>
+                <th scope="col" class="task" hidden>What to Do</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="order">01</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/C"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Simple Calculator</a
+                  ><span class="source">Sheet 1 · C</span>
+                </td>
+                <td class="learning" hidden>
+                  <code>input()</code>, <code>int</code>, <code>split()</code>,
+                  <code>map()</code>, unpacking, arithmetic, and formatted
+                  output.
+                </td>
+                <td class="task" hidden>
+                  Read two numbers and print their sum, product, and difference
+                  in the exact requested format.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">02</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/F"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Digits Summation</a
+                  ><span class="source">Sheet 1 · F</span>
+                </td>
+                <td class="learning" hidden>
+                  Modulo <code>%</code> and identifying the information actually
+                  needed.
+                </td>
+                <td class="task" hidden>
+                  Extract the last digit of each of two numbers and print the
+                  sum of those two digits.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">03</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/223206/problem/B"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Watermelon</a
+                  ><span class="source">Sheet 8 · B</span>
+                </td>
+                <td class="learning" hidden>
+                  <code>if/else</code>, <code>and</code>, parity, and boundary
+                  cases.
+                </td>
+                <td class="task" hidden>
+                  Determine whether a watermelon can be split into two positive,
+                  even-weight parts. Check the special case of weight 2.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">04</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/R"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Age in Days</a
+                  ><span class="source">Sheet 1 · R</span>
+                </td>
+                <td class="learning" hidden>
+                  Integer division <code>//</code>, remainder <code>%</code>,
+                  and sequential calculations.
+                </td>
+                <td class="task" hidden>
+                  Convert an age in days into years, months, and remaining days,
+                  using 365 days per year and 30 days per month.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">05</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/E"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Area of a Circle</a
+                  ><span class="source">Sheet 1 · E</span>
+                </td>
+                <td class="learning" hidden>
+                  <code>float</code>, exponentiation <code>**</code>, and
+                  decimal formatting.
+                </td>
+                <td class="task" hidden>
+                  Calculate a circle's area using the statement's value of π and
+                  print exactly nine digits after the decimal point.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="loops" aria-labelledby="loops-title">
+        <div class="section-heading">
+          <span class="section-number">02</span>
+          <div>
+            <h2 id="loops-title">Loops: Repeat, Filter &amp; Simulate</h2>
+            <p>Understand what repeats, what changes, and when to stop.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table aria-labelledby="loops-title">
+            <thead>
+              <tr>
+                <th scope="col" class="order">#</th>
+                <th scope="col">Problem</th>
+                <th scope="col" class="learning" hidden>Main Learning</th>
+                <th scope="col" class="task" hidden>What to Do</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="order">06</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/A"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >1 to N</a
+                  ><span class="source">Sheet 2 · A</span>
+                </td>
+                <td class="learning" hidden>
+                  <code>for</code>, <code>range()</code>, indentation, and
+                  exclusive range endpoints.
+                </td>
+                <td class="task" hidden>
+                  Print all integers from 1 through N, each on a separate line.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">07</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/B"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Even Numbers</a
+                  ><span class="source">Sheet 2 · B</span>
+                </td>
+                <td class="learning" hidden>
+                  Combining loops with conditions, filtering, and range steps.
+                </td>
+                <td class="task" hidden>
+                  Print the even numbers from 1 through N. Print -1 if there are
+                  none.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">08</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/223206/problem/D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Bear and Big Brother</a
+                  ><span class="source">Sheet 8 · D</span>
+                </td>
+                <td class="learning" hidden>
+                  <code>while</code>, simulation, counters, and stopping
+                  conditions.
+                </td>
+                <td class="task" hidden>
+                  Simulate annual weight growth and count the years until the
+                  smaller bear becomes strictly heavier than the larger bear.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">09</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/G"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Factorial</a
+                  ><span class="source">Sheet 2 · G</span>
+                </td>
+                <td class="learning" hidden>
+                  Product accumulators, multiple test cases, and resetting
+                  state.
+                </td>
+                <td class="task" hidden>
+                  Calculate the factorial for each test case. Start the product
+                  at 1 and handle 0! = 1.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="lists" aria-labelledby="lists-title">
+        <div class="section-heading">
+          <span class="section-number">03</span>
+          <div>
+            <h2 id="lists-title">Lists: Store, Traverse, Search &amp; Build</h2>
+            <p>
+              Work with ordered collections and preserve the information that
+              matters.
+            </p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table aria-labelledby="lists-title">
+            <thead>
+              <tr>
+                <th scope="col" class="order">#</th>
+                <th scope="col">Problem</th>
+                <th scope="col" class="learning" hidden>Main Learning</th>
+                <th scope="col" class="task" hidden>What to Do</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="order">10</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/A"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Summation</a
+                  ><span class="source">Sheet 3 · A</span>
+                </td>
+                <td class="learning" hidden>
+                  <code>list(map(...))</code>, traversal, accumulation,
+                  <code>sum()</code>, and <code>abs()</code>.
+                </td>
+                <td class="task" hidden>
+                  Print the absolute value of the array's total sum, not the sum
+                  of the absolute values of individual elements.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">11</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/C"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Even, Odd, Positive and Negative</a
+                  ><span class="source">Sheet 2 · C</span>
+                </td>
+                <td class="learning" hidden>
+                  Multiple counters, <code>if/elif/else</code>, and independent
+                  classifications.
+                </td>
+                <td class="task" hidden>
+                  Count even, odd, positive, and negative values. Zero is even
+                  but neither positive nor negative.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">12</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/B"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Searching</a
+                  ><span class="source">Sheet 3 · B</span>
+                </td>
+                <td class="learning" hidden>
+                  Indexing, <code>enumerate()</code>, linear search,
+                  <code>break</code>, and default answers.
+                </td>
+                <td class="task" hidden>
+                  Print the zero-based index of the target's first occurrence,
+                  or -1 if it is absent.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">13</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/223205/problem/N"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Shift Zeros</a
+                  ><span class="source">Sheet 5 · N</span>
+                </td>
+                <td class="learning" hidden>
+                  <code>append()</code>, list construction, <code>def</code>,
+                  parameters, <code>return</code>, and unpacked printing.
+                </td>
+                <td class="task" hidden>
+                  Use a function to move every zero to the end while preserving
+                  the original order of non-zero elements.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="strings" aria-labelledby="strings-title">
+        <div class="section-heading">
+          <span class="section-number">04</span>
+          <div>
+            <h2 id="strings-title">
+              Strings: Inspect, Transform &amp; Reassemble
+            </h2>
+            <p>Apply familiar sequence operations to text.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table aria-labelledby="strings-title">
+            <thead>
+              <tr>
+                <th scope="col" class="order">#</th>
+                <th scope="col">Problem</th>
+                <th scope="col" class="learning" hidden>Main Learning</th>
+                <th scope="col" class="task" hidden>What to Do</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="order">14</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219856/problem/F"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Way Too Long Words</a
+                  ><span class="source">Sheet 4 · F</span>
+                </td>
+                <td class="learning" hidden>
+                  <code>len()</code>, first/last characters, negative indexing,
+                  and string formatting.
+                </td>
+                <td class="task" hidden>
+                  Abbreviate words longer than 10 characters using the first
+                  letter, the number of middle characters, and the last letter.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">15</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219856/problem/I"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Palindrome</a
+                  ><span class="source">Sheet 4 · I</span>
+                </td>
+                <td class="learning" hidden>
+                  Symmetric comparisons, string equality, and reverse slicing
+                  <code>[::-1]</code>.
+                </td>
+                <td class="task" hidden>
+                  Determine whether the string reads the same forward and
+                  backward.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">16</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/223206/problem/T"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Helpful Maths</a
+                  ><span class="source">Sheet 8 · T</span>
+                </td>
+                <td class="learning" hidden>
+                  <code>split("+")</code>, <code>sorted()</code>, and
+                  <code>"+".join(...)</code>.
+                </td>
+                <td class="task" hidden>
+                  Rearrange the operands of an addition expression into
+                  non-decreasing order. Operands are the single digits 1, 2, and
+                  3.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="sets-dictionaries" aria-labelledby="sets-dictionaries-title">
+        <div class="section-heading">
+          <span class="section-number">05</span>
+          <div>
+            <h2 id="sets-dictionaries-title">
+              Sets &amp; Dictionaries: Choose the Right Tool
+            </h2>
+            <p>
+              Represent uniqueness, membership, frequencies, and key-value
+              relationships.
+            </p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table aria-labelledby="sets-dictionaries-title">
+            <thead>
+              <tr>
+                <th scope="col" class="order">#</th>
+                <th scope="col">Problem</th>
+                <th scope="col" class="learning" hidden>Main Learning</th>
+                <th scope="col" class="task" hidden>What to Do</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="order">17</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/223205/problem/M"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Distinct Numbers</a
+                  ><span class="source">Sheet 5 · M</span>
+                </td>
+                <td class="learning" hidden>
+                  <code>set()</code>, uniqueness, <code>len()</code>, and
+                  functions returning values.
+                </td>
+                <td class="task" hidden>
+                  Use a function to count the distinct numbers in an array. The
+                  array may be empty.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">18</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/223206/problem/S"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Good Number</a
+                  ><span class="source">Sheet 8 · S</span>
+                </td>
+                <td class="learning" hidden>
+                  Character sets, membership with <code>in</code>, and subset
+                  checking.
+                </td>
+                <td class="task" hidden>
+                  Count numbers containing every digit from 0 through k at least
+                  once. Additional digits are allowed.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">19</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/223207/problem/W"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Football</a
+                  ><span class="source">Sheet 9 · W</span>
+                </td>
+                <td class="learning" hidden>
+                  <code>dict</code>, <code>.get()</code>, frequency counting,
+                  and iterating over <code>.items()</code>.
+                </td>
+                <td class="task" hidden>
+                  Build a scoreboard from the team name recorded for each goal,
+                  then print the winning team. A tie is not possible.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">20</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/V"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Frequency Array</a
+                  ><span class="source">Sheet 3 · V</span>
+                </td>
+                <td class="learning" hidden>
+                  Frequency lists versus dictionaries, bounded keys, and
+                  missing-value counts.
+                </td>
+                <td class="task" hidden>
+                  Count occurrences and print a count for every value from 1
+                  through M, including values that never appear.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">21</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219856/problem/W"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Encrypt &amp; Decrypt Message</a
+                  ><span class="source">Sheet 4 · W</span>
+                </td>
+                <td class="learning" hidden>
+                  Character-to-character dictionaries, <code>zip()</code>,
+                  reverse mappings, and <code>join()</code>.
+                </td>
+                <td class="task" hidden>
+                  Encrypt or decrypt a message by translating each character
+                  with the substitution key supplied in the statement.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="maths" aria-labelledby="maths-title">
+        <div class="section-heading">
+          <span class="section-number">06</span>
+          <div>
+            <h2 id="maths-title">Basic Maths &amp; Efficiency</h2>
+            <p>
+              Use number properties and constraints to avoid unnecessary work.
+            </p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table aria-labelledby="maths-title">
+            <thead>
+              <tr>
+                <th scope="col" class="order">#</th>
+                <th scope="col">Problem</th>
+                <th scope="col" class="learning" hidden>Main Learning</th>
+                <th scope="col" class="task" hidden>What to Do</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="order">22</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/G"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Summation from 1 to N</a
+                  ><span class="source">Sheet 1 · G</span>
+                </td>
+                <td class="learning" hidden>
+                  Loop versus formula, integer arithmetic, and time-complexity
+                  intuition.
+                </td>
+                <td class="task" hidden>
+                  Find 1 + 2 + … + N for N up to one billion. Derive a formula
+                  instead of performing N iterations.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">23</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/K"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Divisors</a
+                  ><span class="source">Sheet 2 · K</span>
+                </td>
+                <td class="learning" hidden>
+                  Divisibility, generating candidates, and filtering with
+                  modulo.
+                </td>
+                <td class="task" hidden>
+                  Print all positive divisors of a number in ascending order,
+                  one per line.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">24</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/H"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >One Prime</a
+                  ><span class="source">Sheet 2 · H</span>
+                </td>
+                <td class="learning" hidden>
+                  Early exit, factor pairs, and checking divisors only up to the
+                  square root.
+                </td>
+                <td class="task" hidden>
+                  Determine whether a number is prime. Explain why a composite
+                  number must have a factor no larger than its square root.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">25</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/223338/problem/H"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >GCD</a
+                  ><span class="source">Sheet 6 · H</span>
+                </td>
+                <td class="learning" hidden>
+                  Euclid's algorithm, <code>while</code>, simultaneous
+                  assignment, and <code>math.gcd()</code>.
+                </td>
+                <td class="task" hidden>
+                  Print both the greatest common divisor and least common
+                  multiple of two positive integers.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="challenges" aria-labelledby="challenges-title">
+        <div class="section-heading">
+          <span class="section-number">07</span>
+          <div>
+            <h2 id="challenges-title">
+              Application Challenges: Combine Your Tools
+            </h2>
+            <p>
+              Bring familiar language features together in games, grids, and
+              simulations.
+            </p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table aria-labelledby="challenges-title">
+            <thead>
+              <tr>
+                <th scope="col" class="order">#</th>
+                <th scope="col">Problem</th>
+                <th scope="col" class="learning" hidden>Main Learning</th>
+                <th scope="col" class="task" hidden>What to Do</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="order">26</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/223206/problem/F"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Fox And Snake</a
+                  ><span class="source">Sheet 8 · F</span>
+                </td>
+                <td class="learning" hidden>
+                  Row patterns, parity, string repetition, and output
+                  construction.
+                </td>
+                <td class="task" hidden>
+                  Print a snake pattern on a grid, alternating full rows with
+                  connecting rows at the appropriate edge.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">27</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/223340/problem/F"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Marks</a
+                  ><span class="source">Sheet 10 · F</span>
+                </td>
+                <td class="learning" hidden>
+                  Rows and columns, nested loops, maxima, and a set of student
+                  indices.
+                </td>
+                <td class="task" hidden>
+                  Count students who have the highest mark in at least one
+                  subject. Include tied toppers and count each student only
+                  once.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">28</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/223207/problem/C"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Dragons</a
+                  ><span class="source">Sheet 9 · C</span>
+                </td>
+                <td class="learning" hidden>
+                  Lists of tuples, sorting, unpacking, and greedy reasoning.
+                </td>
+                <td class="task" hidden>
+                  Choose an order to fight all dragons, gaining strength bonuses
+                  after victories. Your strength must be strictly greater than
+                  the dragon's.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">29</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/223206/problem/L"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Sereja and Dima</a
+                  ><span class="source">Sheet 8 · L</span>
+                </td>
+                <td class="learning" hidden>
+                  Two pointers, alternating turns, and simulation.
+                </td>
+                <td class="task" hidden>
+                  Simulate two players repeatedly taking the larger of the two
+                  end cards. Print both final scores.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">30</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/223340/problem/K"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Snacktower</a
+                  ><span class="source">Sheet 10 · K</span>
+                </td>
+                <td class="learning" hidden>
+                  Set membership, <code>add()</code>/<code>remove()</code>,
+                  persistent state, and total-work analysis.
+                </td>
+                <td class="task" hidden>
+                  Process snacks arriving in random order and place every
+                  currently available next-largest snack. Print a line for every
+                  day, even when nothing is placed.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">31</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/223340/problem/Q"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Bulbs</a
+                  ><span class="source">Sheet 10 · Q</span>
+                </td>
+                <td class="learning" hidden>
+                  Running maximum, prefix invariants, and avoiding repeated
+                  scans.
+                </td>
+                <td class="task" hidden>
+                  Count moments when all switched-on bulbs form a complete
+                  prefix starting at bulb 1.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="stretch" aria-labelledby="stretch-title">
+        <div class="section-heading">
+          <span class="section-number">08</span>
+          <div>
+            <h2 id="stretch-title">Stretch: From Language to Algorithms</h2>
+            <p>
+              Attempt these after becoming comfortable with loops, indexing, and
+              functions.
+            </p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table aria-labelledby="stretch-title">
+            <thead>
+              <tr>
+                <th scope="col" class="order">#</th>
+                <th scope="col">Problem</th>
+                <th scope="col" class="learning" hidden>Main Learning</th>
+                <th scope="col" class="task" hidden>What to Do</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="order">32</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/Y"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Range sum query</a
+                  ><span class="source">Sheet 3 · Y</span>
+                </td>
+                <td class="learning" hidden>
+                  Prefix sums, preprocessing, query complexity, and one-based
+                  boundaries.
+                </td>
+                <td class="task" hidden>
+                  Answer many inclusive range-sum queries. Precompute prefix
+                  sums instead of summing each range again.
+                </td>
+              </tr>
+              <tr>
+                <td class="order">33</td>
+                <td class="problem">
+                  <a
+                    href="https://codeforces.com/group/MWSDmqGsZm/contest/223339/problem/E"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Base Converssion</a
+                  ><span class="source"
+                    >Sheet 7 · E · Original problem title</span
+                  >
+                </td>
+                <td class="learning" hidden>
+                  Recursion, base cases, call order, <code>% 2</code>, and
+                  <code>// 2</code>.
+                </td>
+                <td class="task" hidden>
+                  Convert each decimal number to binary using recursion, as
+                  required by the statement.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>
+        <strong>Suggested first-session route:</strong> 01 → 03 → 07 → 10 → 17 →
+        19. Use 06 as a short loop demonstration before 07.
+      </p>
+      <p>
+        This is a multi-session learning path, not a two-hour completion target.
+        The order follows prerequisites rather than sheet numbers. The final
+        stages are advanced relative to this beginner course.
+      </p>
+      <p>
+        Source:
+        <a
+          href="https://codeforces.com/group/MWSDmqGsZm"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Assiut University Training — Newcomers, Codeforces</a
+        >. This self-contained document works offline; opening problem
+        statements requires internet access.
+      </p>
+    </footer>
+    <script>
+      const learningButton = document.getElementById("toggle-learning");
+      const taskButton = document.getElementById("toggle-task");
+      const status = document.getElementById("visibility-status");
+      const visibility = { learning: false, task: false };
+
+      function renderVisibility() {
+        for (const name of ["learning", "task"]) {
+          document.querySelectorAll(`.${name}`).forEach((cell) => {
+            cell.hidden = !visibility[name];
+          });
+        }
+        learningButton.setAttribute(
+          "aria-pressed",
+          String(visibility.learning),
+        );
+        taskButton.setAttribute("aria-pressed", String(visibility.task));
+        learningButton.textContent = `${visibility.learning ? "Hide" : "Show"} Main Learning`;
+        taskButton.textContent = `${visibility.task ? "Hide" : "Show"} What to Do`;
+        status.textContent =
+          visibility.learning && visibility.task
+            ? "Both teaching columns are visible"
+            : visibility.learning
+              ? "Main Learning visible · What to Do hidden"
+              : visibility.task
+                ? "What to Do visible · Main Learning hidden"
+                : "Both teaching columns are hidden";
+      }
+
+      function hideBoth() {
+        visibility.learning = false;
+        visibility.task = false;
+        renderVisibility();
+      }
+
+      learningButton.addEventListener("click", () => {
+        visibility.learning = !visibility.learning;
+        renderVisibility();
+      });
+      taskButton.addEventListener("click", () => {
+        visibility.task = !visibility.task;
+        renderVisibility();
+      });
+      document.getElementById("show-all").addEventListener("click", () => {
+        visibility.learning = true;
+        visibility.task = true;
+        renderVisibility();
+      });
+      document.getElementById("hide-all").addEventListener("click", hideBoth);
+      document
+        .getElementById("print-guide")
+        .addEventListener("click", () => window.print());
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") hideBoth();
+      });
+      window.addEventListener("pageshow", hideBoth);
+      document.querySelectorAll("button").forEach((button) => {
+        button.disabled = false;
+      });
+      renderVisibility();
+    </script>
+  </body>
+</html>
